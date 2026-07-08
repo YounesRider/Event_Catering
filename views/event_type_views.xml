@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_event_catering_type_form" model="ir.ui.view">
+        <field name="name">event.catering.type.form</field>
+        <field name="model">event.catering.type</field>
+        <field name="arch" type="xml">
+            <form string="Event Type">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nom du type"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="description"/>
+                        <field name="color"/>
+                        <field name="staff_ratio"/>
+                        <field name="preparation_time"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_event_catering_type_list" model="ir.ui.view">
+        <field name="name">event.catering.type.list</field>
+        <field name="model">event.catering.type</field>
+        <field name="arch" type="xml">
+            <list string="Types d'événements">
+                <field name="name"/>
+                <field name="staff_ratio"/>
+                <field name="preparation_time"/>
+                <field name="active" widget="boolean"/>
+            </list>
+        </field>
+    </record>
+
+</odoo>

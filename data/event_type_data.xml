@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="event_type_cocktail" model="event.catering.type">
+            <field name="name">Cocktail</field>
+            <field name="description">Cocktail debout</field>
+            <field name="color">10</field>
+            <field name="staff_ratio">15.0</field>
+            <field name="preparation_time">1.5</field>
+        </record>
+        
+        <record id="event_type_dinner" model="event.catering.type">
+            <field name="name">Dîner Assis</field>
+            <field name="description">Dîner assis formel</field>
+            <field name="color">2</field>
+            <field name="staff_ratio">10.0</field>
+            <field name="preparation_time">2.0</field>
+        </record>
+        
+        <record id="event_type_wedding" model="event.catering.type">
+            <field name="name">Mariage</field>
+            <field name="description">Réception de mariage</field>
+            <field name="color">3</field>
+            <field name="staff_ratio">12.0</field>
+            <field name="preparation_time">3.0</field>
+        </record>
+        
+        <record id="event_type_seminar" model="event.catering.type">
+            <field name="name">Séminaire</field>
+            <field name="description">Séminaire d'entreprise</field>
+            <field name="color">8</field>
+            <field name="staff_ratio">8.0</field>
+            <field name="preparation_time">1.0</field>
+        </record>
+    </data>
+</odoo>

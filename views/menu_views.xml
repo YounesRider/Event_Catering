@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_event_catering_root"
+          name="Event Catering"
+          sequence="10"
+          web_icon="event_catering/static/description/icon.png"/>
+
+
+    <!-- Événements -->
+    <menuitem id="menu_event_catering_events"
+              name="Événements"
+              parent="menu_event_catering_root"
+              sequence="20"
+              action="action_event_catering_event"/>
+
+
+    <!-- Calendrier -->
+    <menuitem id="menu_event_catering_calendar"
+              name="Calendrier"
+              parent="menu_event_catering_root"
+              sequence="30"
+              action="action_event_catering_event"/>
+
+
+    <!-- Configuration -->
+    <menuitem id="menu_event_catering_config"
+              name="Configuration"
+              parent="menu_event_catering_root"
+              sequence="100"/>
+
+
+    <!-- Types d'événements -->
+    <menuitem id="menu_event_catering_types"
+              name="Types d'événements"
+              parent="menu_event_catering_config"
+              sequence="10"
+              action="action_event_catering_type"/>
+
+    <menuitem id="menu_event_catering_dashboard"
+          name="Tableau de bord"
+          parent="menu_event_catering_root"
+          sequence="5"
+          action="action_event_catering_dashboard"/>
+
+</odoo>

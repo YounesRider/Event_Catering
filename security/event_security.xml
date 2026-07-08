@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Catégorie du module -->
+        <record id="module_category_event_catering" model="ir.module.category">
+            <field name="name">Event Catering</field>
+            <field name="description">Gestion des événements pour traiteur</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <!-- Groupe Employee -->
+        <record id="group_event_employee" model="res.groups">
+            <field name="name">Employee</field>
+            <field name="category_id" ref="module_category_event_catering"/>
+        </record>
+        
+        <!-- Groupe Event Manager -->
+        <record id="group_event_manager" model="res.groups">
+            <field name="name">Event Manager</field>
+            <field name="category_id" ref="module_category_event_catering"/>
+            <field name="implied_ids" eval="[(4, ref('group_event_employee'))]"/>
+        </record>
+        
+        <!-- Groupe Administrator -->
+        <record id="group_event_admin" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="category_id" ref="module_category_event_catering"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_system')), (4, ref('group_event_manager'))]"/>
+        </record>
+        
+        <!-- Groupe Read Only -->
+        <record id="group_event_readonly" model="res.groups">
+            <field name="name">Read Only</field>
+            <field name="category_id" ref="module_category_event_catering"/>
+        </record>
+    </data>
+</odoo>

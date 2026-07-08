@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Action principale événements -->
+    <record id="action_event_catering_event" model="ir.actions.act_window">
+        <field name="name">Événements</field>
+        <field name="res_model">event.catering.event</field>
+        <field name="view_mode">list,kanban,calendar,form,graph,pivot</field>
+    </record>
+
+
+    <!-- Action dashboard -->
+    <record id="action_event_catering_dashboard" model="ir.actions.act_window">
+    <field name="name">Tableau de bord</field>
+    <field name="res_model">event.catering.dashboard</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_event_catering_dashboard"/>
+</record>
+
+
+    <!-- Action types événements -->
+    <record id="action_event_catering_type" model="ir.actions.act_window">
+        <field name="name">Types d'événements</field>
+        <field name="res_model">event.catering.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

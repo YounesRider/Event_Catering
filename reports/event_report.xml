@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Action rapport -->
+    <record id="action_report_event_catering" model="ir.actions.report">
+
+        <field name="name">Fiche Événement</field>
+
+        <field name="model">event.catering.event</field>
+
+        <field name="report_type">qweb-pdf</field>
+
+        <field name="report_name">
+            event_catering.report_event_template
+        </field>
+
+        <field name="report_file">
+            event_catering.report_event_template
+        </field>
+
+        <field name="print_report_name">
+            'Fiche-%s' % (object.name)
+        </field>
+
+        <field name="binding_model_id"
+               ref="model_event_catering_event"/>
+
+        <field name="binding_type">report</field>
+
+    </record>
+
+
+    <!-- Template QWeb -->
+    <template id="report_event_template">
+
+        <t t-call="web.html_container">
+
+            <t t-foreach="docs" t-as="o">
+
+                <t t-call="web.external_layout">
+
+                    <div class="page">
+
+                        <h2>
+                            Fiche Événement
+                        </h2>
+
+
+                        <p>
+                            <strong>Référence :</strong>
+                            <span t-field="o.reference"/>
+                        </p>
+
+
+                        <table class="table table-sm">
+
+                            <tr>
+                                <td><strong>Nom</strong></td>
+                                <td>
+                                    <span t-field="o.name"/>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td><strong>Client</strong></td>
+                                <td>
+                                    <span t-field="o.client_id"/>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td><strong>Type</strong></td>
+                                <td>
+                                    <span t-field="o.event_type_id"/>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td><strong>Date début</strong></td>
+                                <td>
+                                    <span t-field="o.date_start"/>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td><strong>Date fin</strong></td>
+                                <td>
+                                    <span t-field="o.date_end"/>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td><strong>Lieu</strong></td>
+                                <td>
+                                    <span t-field="o.location"/>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td><strong>Invités</strong></td>
+                                <td>
+                                    <span t-field="o.guests_count"/>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td><strong>Statut</strong></td>
+                                <td>
+                                    <span t-field="o.state"/>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td><strong>Budget estimé</strong></td>
+                                <td>
+                                    <span t-field="o.budget_estimated"/>
+                                </td>
+                            </tr>
+
+
+                        </table>
+
+
+                        <h3>Prestations</h3>
+
+                        <table class="table table-sm">
+
+                            <thead>
+                                <tr>
+                                    <th>Produit</th>
+                                    <th>Quantité</th>
+                                    <th>Prix</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr t-foreach="o.event_line_ids"
+                                    t-as="line">
+
+                                    <td>
+                                        <span t-field="line.product_id"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-field="line.quantity"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-field="line.unit_price"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-field="line.total_price"/>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <h3>Personnel</h3>
+
+                        <table class="table table-sm">
+
+                            <thead>
+                                <tr>
+                                    <th>Employé</th>
+                                    <th>Rôle</th>
+                                    <th>Début</th>
+                                    <th>Fin</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr t-foreach="o.staff_allocation_ids"
+                                    t-as="staff">
+
+                                    <td>
+                                        <span t-field="staff.employee_id"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-field="staff.role"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-field="staff.start_time"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-field="staff.end_time"/>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                    </div>
+
+                </t>
+
+            </t>
+
+        </t>
+
+    </template>
+
+</odoo>

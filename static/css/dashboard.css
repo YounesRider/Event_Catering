@@ -1,0 +1,70 @@
+.oe_dashboard {
+    padding: 20px;
+}
+
+.dashboard-card {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.dashboard-card.bg-primary {
+    background: #7c7bad;
+    color: white;
+}
+
+.dashboard-card.bg-success {
+    background: #28a745;
+    color: white;
+}
+
+.dashboard-card.bg-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.dashboard-card.bg-warning {
+    background: #ffc107;
+    color: white;
+}
+
+.dashboard-card-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.dashboard-card-number {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.dashboard-chart {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.dashboard-chart h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.dashboard-table {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    padding: 15px;
+}
+
+.dashboard-table h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+}

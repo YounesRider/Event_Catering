@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Vue Formulaire -->
+    <record id="view_event_catering_event_form" model="ir.ui.view">
+        <field name="name">event.catering.event.form</field>
+        <field name="model">event.catering.event</field>
+        <field name="arch" type="xml">
+            <form string="Event">
+                <header>
+
+                    <button name="action_confirm"
+                            string="Confirmer"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state not in ('draft', 'quotation')"/>
+
+                    <button name="action_prepare"
+                            string="Préparer"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state != 'confirmed'"/>
+
+                    <button name="action_start"
+                            string="Démarrer"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state != 'preparation'"/>
+
+                    <button name="action_done"
+                            string="Terminé"
+                            type="object"
+                            class="btn-success"
+                            invisible="state != 'in_progress'"/>
+
+                    <button name="action_archive"
+                            string="Archiver"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state != 'done'"/>
+
+                    <button name="action_reset_to_draft"
+                            string="Réinitialiser"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state not in ('quotation', 'confirmed', 'preparation')"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+
+                <sheet>
+
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nom de l'événement"/>
+                        </h1>
+                        <h2>
+                            <field name="reference" readonly="1"/>
+                        </h2>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="client_id"/>
+                            <field name="event_type_id"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="guests_count"/>
+                        </group>
+
+                        <group>
+                            <field name="responsible_id"/>
+                            <field name="location"/>
+                            <field name="city"/>
+                            <field name="room"/>
+                            <field name="budget_estimated"/>
+                            <field name="budget_actual"/>
+                            <field name="total_cost" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+
+                        <page string="Prestations">
+                            <field name="event_line_ids"/>
+                        </page>
+
+                        <page string="Personnel">
+                            <field name="staff_allocation_ids"/>
+                            <group>
+                                <field name="recommended_staff" readonly="1"/>
+                            </group>
+                        </page>
+
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Vue Liste -->
+    <record id="view_event_catering_event_list" model="ir.ui.view">
+        <field name="name">event.catering.event.list</field>
+        <field name="model">event.catering.event</field>
+        <field name="arch" type="xml">
+            <list string="Événements"
+                  decoration-info="state == 'confirmed'"
+                  decoration-success="state == 'done'"
+                  decoration-warning="state == 'preparation'"
+                  decoration-danger="state == 'quotation'">
+
+                <field name="reference"/>
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="event_type_id"/>
+                <field name="guests_count"/>
+                <field name="state" widget="badge"/>
+                <field name="responsible_id"/>
+
+            </list>
+        </field>
+    </record>
+
+    <!-- Vue Kanban -->
+    <record id="view_event_catering_event_kanban" model="ir.ui.view">
+        <field name="name">event.catering.event.kanban</field>
+        <field name="model">event.catering.event</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="date_start"/>
+                <field name="state"/>
+                <field name="guests_count"/>
+                <field name="responsible_id"/>
+                <field name="event_type_id"/>
+
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+
+                            <div class="o_kanban_record_top">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <field name="state" widget="badge"/>
+                            </div>
+
+                            <div class="mt-2">
+                                <div>
+                                    <i class="fa fa-user me-1"/>
+                                    <field name="client_id"/>
+                                </div>
+
+                                <div>
+                                    <i class="fa fa-calendar me-1"/>
+                                    <field name="date_start"/>
+                                </div>
+
+                                <div>
+                                    <i class="fa fa-users me-1"/>
+                                    <field name="guests_count"/>
+                                </div>
+
+                                <div>
+                                    <i class="fa fa-user-circle me-1"/>
+                                    <field name="responsible_id"/>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </t>
+                </templates>
+
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Vue Calendrier -->
+    <record id="view_event_catering_event_calendar" model="ir.ui.view">
+    <field name="name">event.catering.event.calendar</field>
+    <field name="model">event.catering.event</field>
+    <field name="arch" type="xml">
+        <calendar string="Calendrier des événements"
+                  date_start="date_start"
+                  date_stop="date_end"
+                  color="event_type_id">
+
+            <field name="name"/>
+            <field name="client_id"/>
+            <field name="state"/>
+            <field name="event_type_id"/>
+            <field name="guests_count"/>
+            <field name="responsible_id"/>
+
+        </calendar>
+    </field>
+</record>
+
+    <!-- Vue Graph -->
+    <record id="view_event_catering_event_graph" model="ir.ui.view">
+        <field name="name">event.catering.event.graph</field>
+        <field name="model">event.catering.event</field>
+        <field name="arch" type="xml">
+            <graph string="Événements" type="bar">
+                <field name="event_type_id"/>
+                <field name="date_start" interval="month"/>
+                <field name="guests_count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Vue Pivot -->
+    <record id="view_event_catering_event_pivot" model="ir.ui.view">
+        <field name="name">event.catering.event.pivot</field>
+        <field name="model">event.catering.event</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse des événements">
+                <field name="state" type="col"/>
+                <field name="event_type_id" type="row"/>
+                <field name="guests_count" type="measure"/>
+                <field name="total_cost" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Vue Recherche -->
+    <record id="view_event_catering_event_search" model="ir.ui.view">
+        <field name="name">event.catering.event.search</field>
+        <field name="model">event.catering.event</field>
+        <field name="arch" type="xml">
+            <search>
+
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="event_type_id"/>
+                <field name="responsible_id"/>
+
+                <filter name="filter_confirmed"
+                        string="Confirmé"
+                        domain="[('state','=','confirmed')]"/>
+
+                <filter name="filter_done"
+                        string="Terminé"
+                        domain="[('state','=','done')]"/>
+
+                <filter name="filter_in_progress"
+                        string="En cours"
+                        domain="[('state','=','in_progress')]"/>
+
+                <group expand="0" string="Grouper par">
+
+                    <filter name="group_by_state"
+                            string="Statut"
+                            context="{'group_by':'state'}"/>
+
+                    <filter name="group_by_type"
+                            string="Type"
+                            context="{'group_by':'event_type_id'}"/>
+
+                    <filter name="group_by_responsible"
+                            string="Responsable"
+                            context="{'group_by':'responsible_id'}"/>
+
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+   
+
+</odoo>
