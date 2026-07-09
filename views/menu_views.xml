@@ -6,7 +6,13 @@
           sequence="10"
           web_icon="event_catering/static/description/icon.png"/>
 
-
+    <!-- dashboard -->    
+    <menuitem id="menu_event_catering_dashboard"
+          name="Tableau de bord"
+          parent="menu_event_catering_root"
+          sequence="5"
+          action="action_event_catering_dashboard_client"/>
+          
     <!-- Événements -->
     <menuitem id="menu_event_catering_events"
               name="Événements"
@@ -37,10 +43,6 @@
               sequence="10"
               action="action_event_catering_type"/>
 
-    <menuitem id="menu_event_catering_dashboard"
-          name="Tableau de bord"
-          parent="menu_event_catering_root"
-          sequence="5"
-          action="action_event_catering_dashboard"/>
+    
 
 </odoo>

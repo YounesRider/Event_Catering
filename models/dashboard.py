@@ -1,47 +1,118 @@
-from odoo import models, fields, api
+from collections import Counter
+
+from odoo import api, models
 
 
 class EventCateringDashboard(models.Model):
     _name = "event.catering.dashboard"
     _description = "Event Catering Dashboard"
 
-    name = fields.Char(default="Tableau de bord")
+    @api.model
+    def get_dashboard_data(self):
 
-    total_events = fields.Integer(
-        string="Total événements",
-        compute="_compute_statistics"
-    )
+        events = self.env["event.catering.event"].sudo().search([])
 
-    confirmed_events = fields.Integer(
-        string="Confirmés",
-        compute="_compute_statistics"
-    )
+        # =====================
+        # KPI
+        # =====================
 
-    running_events = fields.Integer(
-        string="En cours",
-        compute="_compute_statistics"
-    )
+        total_events = len(events)
+        total_guests = 0
+        estimated_budget = 0
+        actual_budget = 0
 
-    done_events = fields.Integer(
-        string="Terminés",
-        compute="_compute_statistics"
-    )
+        # =====================
+        # Statistiques
+        # =====================
 
-    @api.depends()
-    def _compute_statistics(self):
-        Event = self.env["event.catering.event"]
+        states = Counter()
+        event_types = Counter()
+        months = Counter()
+        guests_by_type = Counter()
+        budget_by_type = {}
 
-        for dashboard in self:
-            dashboard.total_events = Event.search_count([])
+        for event in events:
 
-            dashboard.confirmed_events = Event.search_count([
-                ("state", "=", "confirmed")
-            ])
+            # KPI
+            total_guests += event.guests_count or 0
+            estimated_budget += event.budget_estimated or 0
+            actual_budget += event.budget_difference or 0
 
-            dashboard.running_events = Event.search_count([
-                ("state", "=", "in_progress")
-            ])
+            # États
+            states[event.state] += 1
 
-            dashboard.done_events = Event.search_count([
-                ("state", "=", "done")
-            ])
+            # Types
+            if event.event_type_id:
+
+                type_name = event.event_type_id.name
+
+                event_types[type_name] += 1
+
+                guests_by_type[type_name] += event.guests_count or 0
+
+                if type_name not in budget_by_type:
+                    budget_by_type[type_name] = {
+                        "estimated": 0,
+                        "actual": 0,
+                    }
+
+                budget_by_type[type_name]["estimated"] += (
+                    event.budget_estimated or 0
+                )
+
+                budget_by_type[type_name]["actual"] += (
+                    event.budget_actual or 0
+                )
+
+            # Évolution mensuelle
+            if event.date_start:
+                month = event.date_start.strftime("%Y-%m")
+                months[month] += 1
+
+        return {
+
+            # KPI
+            "kpi": {
+                "events": total_events,
+                "guests": total_guests,
+                "estimated_budget": estimated_budget,
+                "actual_budget": actual_budget,
+            },
+
+            # Doughnut
+            "states": {
+                "labels": list(states.keys()),
+                "values": list(states.values()),
+            },
+
+            # Bar chart
+            "types": {
+                "labels": list(event_types.keys()),
+                "values": list(event_types.values()),
+            },
+
+            # Line chart
+            "months": {
+                "labels": list(months.keys()),
+                "values": list(months.values()),
+            },
+
+            # Budget
+            "budget": {
+                "labels": list(budget_by_type.keys()),
+                "estimated": [
+                    value["estimated"]
+                    for value in budget_by_type.values()
+                ],
+                "actual": [
+                    value["actual"]
+                    for value in budget_by_type.values()
+                ],
+            },
+
+            # Invités
+            "guests": {
+                "labels": list(guests_by_type.keys()),
+                "values": list(guests_by_type.values()),
+            },
+        }

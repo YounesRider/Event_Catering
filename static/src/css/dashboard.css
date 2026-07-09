@@ -1,0 +1,109 @@
+/* Dashboard container */
+
+.event-catering-dashboard {
+    padding: 20px;
+}
+
+
+/* Titre */
+
+.event-catering-dashboard h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+
+/* KPI Cards */
+
+.event-dashboard-card {
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+
+    height: 120px;
+
+}
+
+
+.event-dashboard-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+
+}
+
+
+
+.event-dashboard-card h3 {
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    margin: 0;
+
+}
+
+
+
+.event-dashboard-card p {
+
+    margin-top: 10px;
+
+    color: #666;
+
+    font-size: 15px;
+
+}
+
+
+
+/* Zone graphique */
+
+.event-chart-card {
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+    min-height: 350px;
+
+}
+
+
+
+/* Canvas Chart.js */
+
+.event-chart-card canvas {
+
+    max-height: 300px;
+
+}
+
+
+
+/* Responsive */
+
+@media(max-width: 992px){
+
+    .event-dashboard-card {
+
+        margin-bottom: 15px;
+
+    }
+
+}

@@ -25,22 +25,33 @@
         'mail',
         'web',
     ],
+
     'data': [
-    'security/event_security.xml',
-    'security/ir.model.access.xml',
+        'security/event_security.xml',
+        'security/ir.model.access.xml',
 
-    'data/event_sequence.xml',
-    'data/event_type_data.xml',
+        'data/event_sequence.xml',
+        'data/event_type_data.xml',
 
-    'views/dashboard_views.xml',
-    'views/event_views.xml',
-    'views/event_type_views.xml',
+        'views/action.xml',
+        'views/event_type_views.xml',
+        'views/event_views.xml',
+        'views/menu_views.xml',
 
-    'views/action.xml',
-    'views/menu_views.xml',
+        'reports/event_report.xml',
+    ],
 
-    'reports/event_report.xml',
-],
+    'assets': {
+
+        'web.assets_backend': [
+
+            'event_catering/static/src/css/dashboard.css',
+            'event_catering/static/src/js/dashboard.js',
+            'event_catering/static/src/xml/dashboard.xml',
+
+        ],
+
+    },
     'demo': [],
     'installable': True,
     'application': True,

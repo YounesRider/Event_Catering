@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+
+<t t-name="event_catering_dashboard">
+
+
+<div class="container-fluid event-catering-dashboard">
+
+
+<h1>
+Tableau de bord événements
+</h1>
+
+
+
+<div class="row">
+
+
+<div class="col-3">
+<div class="event-dashboard-card">
+
+<h3>
+<t t-esc="this.data.kpi.events"/>
+</h3>
+
+<p>
+Événements
+</p>
+
+</div>
+</div>
+
+
+
+<div class="col-3">
+<div class="event-dashboard-card">
+
+<h3>
+<t t-esc="this.data.kpi.guests"/>
+</h3>
+
+<p>
+Invités
+</p>
+
+</div>
+</div>
+
+
+
+<div class="col-3">
+<div class="event-dashboard-card">
+
+<h3>
+<t t-esc="this.data.kpi.estimated_budget"/>
+</h3>
+
+<p>
+Budget estimé
+</p>
+
+</div>
+</div>
+
+
+
+<div class="col-3">
+<div class="event-dashboard-card">
+
+<h3>
+<t t-esc="this.data.kpi.actual_budget"/>
+</h3>
+
+<p>
+Budget réel
+</p>
+
+</div>
+</div>
+
+
+</div>
+
+
+
+<div class="row mt-4">
+
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+<div class="event-chart-card">
+
+        <h4>
+            États des événements
+        </h4>
+
+        <canvas id="stateChart"/>
+
+    </div>
+
+</div>
+
+
+<div class="col-lg-4 col-md-6 mb-4">
+<div class="event-chart-card">
+
+        <h4>
+            États des événements
+        </h4>
+
+        <canvas id="typeChart"/>
+
+    </div>
+
+
+</div>
+
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+<div class="event-chart-card">
+
+        <h4>
+            États des événements
+        </h4>
+
+        <canvas id="monthChart"/>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</t>
+
+
+</templates>

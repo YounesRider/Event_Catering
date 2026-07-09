@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Action rapport -->
-    <record id="action_report_event_catering" model="ir.actions.report">
-
-        <field name="name">Fiche Événement</field>
-
-        <field name="model">event.catering.event</field>
-
-        <field name="report_type">qweb-pdf</field>
-
-        <field name="report_name">
-            event_catering.report_event_template
-        </field>
-
-        <field name="report_file">
-            event_catering.report_event_template
-        </field>
-
-        <field name="print_report_name">
-            'Fiche-%s' % (object.name)
-        </field>
-
-        <field name="binding_model_id"
-               ref="model_event_catering_event"/>
-
-        <field name="binding_type">report</field>
-
-    </record>
-
-
+    
     <!-- Template QWeb -->
     <template id="report_event_template">
 

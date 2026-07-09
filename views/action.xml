@@ -8,14 +8,32 @@
         <field name="view_mode">list,kanban,calendar,form,graph,pivot</field>
     </record>
 
+<!-- Action rapport -->
+    <record id="action_report_event_catering" model="ir.actions.report">
+
+        <field name="name">Fiche Événement</field>
+
+        <field name="model">event.catering.event</field>
+
+        <field name="report_type">qweb-pdf</field>
+
+        <field name="report_name">event_catering.report_event_template</field>
+        <field name="report_file">event_catering.report_event_template</field>
+        <field name="print_report_name">'Fiche-%s' % (object.name)</field>
+
+        <field name="binding_model_id"
+               ref="model_event_catering_event"/>
+
+        <field name="binding_type">report</field>
+
+    </record>
+
 
     <!-- Action dashboard -->
-    <record id="action_event_catering_dashboard" model="ir.actions.act_window">
+    <record id="action_event_catering_dashboard_client" model="ir.actions.client">
     <field name="name">Tableau de bord</field>
-    <field name="res_model">event.catering.dashboard</field>
-    <field name="view_mode">form</field>
-    <field name="view_id" ref="view_event_catering_dashboard"/>
-</record>
+    <field name="tag">event_catering_dashboard</field>
+    </record>
 
 
     <!-- Action types événements -->

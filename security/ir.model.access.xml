@@ -74,5 +74,14 @@
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="True"/>
         </record>
+        <record id="access_event_catering_dashboard" model="ir.model.access">
+    <field name="name">event.catering.dashboard access</field>
+    <field name="model_id" ref="model_event_catering_dashboard"/>
+    <field name="group_id" ref="base.group_user"/>
+    <field name="perm_read">1</field>
+    <field name="perm_create">1</field>
+    <field name="perm_write">1</field>
+    <field name="perm_unlink">0</field>
+</record>
     </data>
 </odoo>
