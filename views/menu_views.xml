@@ -26,7 +26,7 @@
               name="Calendrier"
               parent="menu_event_catering_root"
               sequence="30"
-              action="action_event_catering_event"/>
+              action="action_event_catering_calendar"/>
 
 
     <!-- Configuration -->

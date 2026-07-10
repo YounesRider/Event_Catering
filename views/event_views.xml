@@ -1,665 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-
     <!-- =========================
          FORM VIEW
     ========================== -->
 
     <record id="view_event_catering_event_form" model="ir.ui.view">
-
         <field name="name">event.catering.event.form</field>
-
         <field name="model">event.catering.event</field>
-
-
         <field name="arch" type="xml">
-
-
             <form string="Événement">
-
-
                 <header>
-
-
                     <button name="action_confirm"
                             string="Confirmer"
                             type="object"
                             icon="fa-check"
                             class="btn-primary"
                             invisible="state not in ('draft','quotation')"/>
-
-
                     <button name="action_prepare"
                             string="Préparer"
                             type="object"
                             invisible="state != 'confirmed'"/>
-
-
                     <button name="action_start"
                             string="Démarrer"
                             type="object"
                             invisible="state != 'preparation'"/>
-
-
                     <button name="action_done"
                             string="Terminé"
                             type="object"
                             class="btn-success"
                             invisible="state != 'in_progress'"/>
-
-
                     <button name="action_archive"
                             string="Archiver"
                             type="object"
                             invisible="state != 'done'"/>
-
-
                     <button name="action_reset_to_draft"
                             string="Retour brouillon"
                             type="object"
                             invisible="state not in ('quotation','confirmed','preparation')"/>
-
-
-                    <field name="state"
-                           widget="statusbar"/>
-
-
+                    <field name="state" widget="statusbar"/>
                 </header>
 
-
-
                 <sheet>
-
-
                     <div class="oe_title">
-
                         <h1>
-
-                            <field name="name"
-                                   placeholder="Nom événement"/>
-
+                            <field name="name" placeholder="Nom événement"/>
                         </h1>
-
-
                         <h3>
-
-                            <field name="reference"
-                                   readonly="1"/>
-
+                            <field name="reference" readonly="1"/>
                         </h3>
-
-
                     </div>
 
-
-
                     <group>
-
-
                         <group string="Informations générales">
-
-
                             <field name="client_id"/>
-
                             <field name="event_type_id"/>
-
                             <field name="date_start"/>
-
                             <field name="date_end"/>
-
                             <field name="guests_count"/>
-
-
                         </group>
-
-
-
-
                         <group string="Organisation">
-
-
                             <field name="responsible_id"/>
-
                             <field name="location"/>
-
                             <field name="city"/>
-
                             <field name="room"/>
-
-
                         </group>
-
-
                     </group>
 
-
-
-
-
                     <group string="Budget">
-
-
                         <group>
-
-
                             <field name="budget_estimated"
                                    widget="monetary"
                                    options="{'currency_field':'currency_id'}"/>
-
-
                             <field name="budget_actual"
                                    readonly="1"
                                    widget="monetary"
                                    options="{'currency_field':'currency_id'}"/>
-
-
                         </group>
-
-
-
                         <group>
-
-
                             <field name="total_cost"
                                    readonly="1"
                                    widget="monetary"
                                    options="{'currency_field':'currency_id'}"/>
-
-
                             <field name="recommended_staff"
                                    readonly="1"/>
-
-
                         </group>
-
-
                     </group>
 
-
-
-
-
-
                     <notebook>
-
-
-
                         <page string="Prestations">
-
-
                             <field name="event_line_ids">
-
-
                                 <list editable="bottom">
-
-
                                     <field name="product_id"/>
-
                                     <field name="quantity"/>
-
                                     <field name="unit_price"/>
-
-                                    <field name="total_price"
-                                           readonly="1"/>
-
-
+                                    <field name="total_price" readonly="1"/>
                                 </list>
-
-
                             </field>
-
-
                         </page>
-
-
-
-
-
 
                         <page string="Personnel">
-
-
                             <field name="staff_allocation_ids">
-
-
                                 <list editable="bottom">
-
-
                                     <field name="employee_id"/>
-
                                     <field name="role"/>
-
                                     <field name="start_time"/>
-
                                     <field name="end_time"/>
-
-
                                 </list>
-
-
                             </field>
-
-
-
                         </page>
-
-
-
-
-
 
                         <page string="Notes">
-
-
                             <field name="notes"/>
-
-
                         </page>
-
-
-
                     </notebook>
-
-
-
                 </sheet>
 
-
-
-                <chatter/>
-
-
-
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
             </form>
-
-
         </field>
-
-
     </record>
-
-
-
-
-
-
 
     <!-- =========================
          LIST VIEW
     ========================== -->
 
-
     <record id="view_event_catering_event_list" model="ir.ui.view">
-
-
         <field name="name">event.catering.event.list</field>
-
-
         <field name="model">event.catering.event</field>
-
-
         <field name="arch" type="xml">
-
-
             <list string="Événements">
-
-
                 <field name="reference"/>
-
                 <field name="name"/>
-
                 <field name="client_id"/>
-
                 <field name="event_type_id"/>
-
                 <field name="date_start"/>
-
                 <field name="guests_count"/>
-
-                <field name="state"
-                       widget="badge"/>
-
+                <field name="state" widget="badge"/>
                 <field name="responsible_id"/>
-
-
+                <field name="priority" widget="priority"/>
             </list>
-
-
         </field>
-
-
     </record>
-
-
-
-
-
-
-
 
     <!-- =========================
          KANBAN VIEW
     ========================== -->
 
-
     <record id="view_event_catering_event_kanban" model="ir.ui.view">
-
-
         <field name="name">event.catering.event.kanban</field>
-
-
         <field name="model">event.catering.event</field>
-
-
         <field name="arch" type="xml">
-
-
             <kanban>
-
-
                 <field name="name"/>
-
                 <field name="client_id"/>
-
                 <field name="event_type_id"/>
-
                 <field name="date_start"/>
-
                 <field name="state"/>
-
                 <field name="guests_count"/>
-
-
+                <field name="priority" widget="priority"/>
 
                 <templates>
-
-
                     <t t-name="card">
-
-
                         <div class="oe_kanban_global_click">
-
-
                             <strong>
                                 <field name="name"/>
                             </strong>
-
-
-
                             <div>
-
-                                <field name="state"
-                                       widget="badge"/>
-
+                                <field name="state" widget="badge"/>
                             </div>
-
-
-
                             <div>
-
-                                👤
-                                <field name="client_id"/>
-
+                                👤 <field name="client_id"/>
                             </div>
-
-
-
                             <div>
-
-                                📅
-                                <field name="date_start"/>
-
+                                📅 <field name="date_start"/>
                             </div>
-
-
-
                             <div>
-
-                                👥
-                                <field name="guests_count"/>
-
+                                👥 <field name="guests_count"/>
                             </div>
-
-
-
+                            <div>
+                                <field name="priority" widget="priority"/>
+                            </div>
                         </div>
-
-
                     </t>
-
-
                 </templates>
-
-
             </kanban>
-
-
         </field>
-
-
     </record>
 
-
-
-
-
-
-
-
-
     <!-- =========================
-         CALENDAR
+         CALENDAR VIEW
     ========================== -->
 
-
-    <record id="view_event_catering_event_calendar"
-            model="ir.ui.view">
-
-
+    <record id="view_event_catering_event_calendar" model="ir.ui.view">
         <field name="name">event.catering.event.calendar</field>
-
-
         <field name="model">event.catering.event</field>
-
-
         <field name="arch" type="xml">
-
-
-            <calendar string="Calendrier événements"
+            <calendar string="Planning des événements"
                       date_start="date_start"
                       date_stop="date_end"
-                      color="event_type_id">
-
-
+                      color="event_type_id"
+                      mode="month">
                 <field name="name"/>
-
                 <field name="client_id"/>
-
-                <field name="state"/>
-
-                <field name="guests_count"/>
-
-
-            </calendar>
-
-
-        </field>
-
-
-    </record>
-
-
-
-
-
-
-
-
-    <!-- =========================
-         GRAPH
-    ========================== -->
-
-
-    <record id="view_event_catering_event_graph"
-            model="ir.ui.view">
-
-
-        <field name="name">event.catering.event.graph</field>
-
-
-        <field name="model">event.catering.event</field>
-
-
-        <field name="arch" type="xml">
-
-
-            <graph string="Analyse événements"
-                   type="bar">
-
-
                 <field name="event_type_id"/>
-
-
-            </graph>
-
-
-        </field>
-
-
-    </record>
-
-
-
-
-
-
-
-
-    <!-- =========================
-         PIVOT
-    ========================== -->
-
-
-    <record id="view_event_catering_event_pivot"
-            model="ir.ui.view">
-
-
-        <field name="name">event.catering.event.pivot</field>
-
-
-        <field name="model">event.catering.event</field>
-
-
-        <field name="arch" type="xml">
-
-
-            <pivot string="Analyse événements">
-
-
-                <field name="event_type_id"
-                       type="row"/>
-
-
-                <field name="state"
-                       type="col"/>
-
-
-                <field name="guests_count"
-                       type="measure"/>
-
-
-                <field name="total_cost"
-                       type="measure"/>
-
-
-            </pivot>
-
-
-        </field>
-
-
-    </record>
-
-
-
-
-
-
-
-
-    <!-- =========================
-         SEARCH
-    ========================== -->
-
-
-    <record id="view_event_catering_event_search"
-            model="ir.ui.view">
-
-
-        <field name="name">event.catering.event.search</field>
-
-
-        <field name="model">event.catering.event</field>
-
-
-        <field name="arch" type="xml">
-
-
-            <search>
-
-
-                <field name="name"/>
-
-                <field name="client_id"/>
-
-                <field name="event_type_id"/>
-
                 <field name="responsible_id"/>
+                <field name="priority" widget="priority"/>
+                <field name="room"/>
+                <field name="city"/>
+                <field name="guests_count"/>
+                <field name="budget_actual" widget="monetary" options="{'currency_field':'currency_id'}"/>
+                <field name="duration"/>
+                <field name="state" widget="badge"/>
+            </calendar>
+        </field>
+    </record>
 
+    <!-- =========================
+         GRAPH VIEW
+    ========================== -->
 
+    <record id="view_event_catering_event_graph" model="ir.ui.view">
+        <field name="name">event.catering.event.graph</field>
+        <field name="model">event.catering.event</field>
+        <field name="arch" type="xml">
+            <graph string="Analyse événements" type="bar">
+                <field name="event_type_id"/>
+                <field name="guests_count" type="measure"/>
+                <field name="total_cost" type="measure"/>
+                <field name="budget_actual" type="measure"/>
+            </graph>
+        </field>
+    </record>
 
-                <filter name="done"
-                        string="Terminés"
-                        domain="[('state','=','done')]"/>
+    <!-- =========================
+         PIVOT VIEW
+    ========================== -->
 
+    <record id="view_event_catering_event_pivot" model="ir.ui.view">
+        <field name="name">event.catering.event.pivot</field>
+        <field name="model">event.catering.event</field>
+        <field name="arch" type="xml">
+            <pivot string="Analyse événements">
+                <field name="event_type_id" type="row"/>
+                <field name="state" type="col"/>
+                <field name="guests_count" type="measure"/>
+                <field name="total_cost" type="measure"/>
+                <field name="budget_actual" type="measure"/>
+                <field name="budget_difference" type="measure"/>
+            </pivot>
+        </field>
+    </record>
 
+    <!-- =========================
+         SEARCH VIEW
+    ========================== -->
+
+    <record id="view_event_catering_event_search" model="ir.ui.view">
+        <field name="name">event.catering.event.search</field>
+        <field name="model">event.catering.event</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="event_type_id"/>
+                <field name="responsible_id"/>
+                <field name="room"/>
+
+                <filter name="today"
+                        string="Aujourd'hui"
+                        domain="[('date_start','&gt;=', context_today()), ('date_start','&lt;', context_today() + relativedelta(days=1))]"/>
+
+                <filter name="draft"
+                        string="Brouillon"
+                        domain="[('state','=','draft')]"/>
 
                 <filter name="confirmed"
-                        string="Confirmés"
+                        string="Confirmé"
                         domain="[('state','=','confirmed')]"/>
 
+                <filter name="preparation"
+                        string="Préparation"
+                        domain="[('state','=','preparation')]"/>
 
+                <filter name="done"
+                        string="Terminé"
+                        domain="[('state','=','done')]"/>
+
+                <separator/>
+
+                <filter name="my_events"
+                        string="Mes événements"
+                        domain="[('responsible_id.user_id','=',uid)]"/>
+
+                <filter name="high_priority"
+                        string="Haute priorité"
+                        domain="[('priority','=','2')]"/>
 
                 <group string="Grouper par">
-
-
                     <filter name="group_type"
                             string="Type"
                             context="{'group_by':'event_type_id'}"/>
-
-
                     <filter name="group_state"
                             string="Etat"
                             context="{'group_by':'state'}"/>
-
-
                     <filter name="group_responsible"
                             string="Responsable"
                             context="{'group_by':'responsible_id'}"/>
-
-
                 </group>
-
-
             </search>
-
-
         </field>
-
-
     </record>
-
-
 
 </odoo>

@@ -13,7 +13,7 @@
         - Calendar and Kanban views
     """,
     'author': 'younes',
-    'website': 'https://www.votreentreprise.com',
+    'website': 'https://www.YounesCompany.com',
     'depends': [
         'base',
         'contacts',

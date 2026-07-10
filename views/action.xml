@@ -35,6 +35,13 @@
     <field name="tag">event_catering_dashboard</field>
     </record>
 
+    <!-- Action calendrier -->
+    <record id="action_event_catering_calendar" model="ir.actions.act_window">
+    <field name="name">Planning </field>
+    <field name="res_model">event.catering.event</field>
+    <field name="view_mode">calendar,form,list</field>
+    </record>
+
 
     <!-- Action types événements -->
     <record id="action_event_catering_type" model="ir.actions.act_window">
