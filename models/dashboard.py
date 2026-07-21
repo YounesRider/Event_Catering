@@ -19,7 +19,7 @@ class EventCateringDashboard(models.Model):
         total_events = len(events)
         total_guests = 0
         estimated_budget = 0
-        actual_budget = 0
+        reel_budget = 0
 
         # =====================
         # Statistiques
@@ -36,7 +36,7 @@ class EventCateringDashboard(models.Model):
             # KPI
             total_guests += event.guests_count or 0
             estimated_budget += event.budget_estimated or 0
-            actual_budget += event.budget_difference or 0
+            reel_budget += event.budget_difference or 0
 
             # États
             states[event.state] += 1
@@ -53,15 +53,15 @@ class EventCateringDashboard(models.Model):
                 if type_name not in budget_by_type:
                     budget_by_type[type_name] = {
                         "estimated": 0,
-                        "actual": 0,
+                        "reel": 0,
                     }
 
                 budget_by_type[type_name]["estimated"] += (
                     event.budget_estimated or 0
                 )
 
-                budget_by_type[type_name]["actual"] += (
-                    event.budget_actual or 0
+                budget_by_type[type_name]["reel"] += (
+                    event.budget_difference or 0
                 )
 
             # Évolution mensuelle
@@ -76,7 +76,7 @@ class EventCateringDashboard(models.Model):
                 "events": total_events,
                 "guests": total_guests,
                 "estimated_budget": estimated_budget,
-                "actual_budget": actual_budget,
+                "reel_budget": reel_budget,
             },
 
             # Doughnut
@@ -93,8 +93,11 @@ class EventCateringDashboard(models.Model):
 
             # Line chart
             "months": {
-                "labels": list(months.keys()),
-                "values": list(months.values()),
+            "labels": sorted(months.keys()),
+            "values": [
+                months[month]
+                for month in sorted(months.keys())
+                ],
             },
 
             # Budget
@@ -104,8 +107,8 @@ class EventCateringDashboard(models.Model):
                     value["estimated"]
                     for value in budget_by_type.values()
                 ],
-                "actual": [
-                    value["actual"]
+                "reel": [
+                    value["reel"]
                     for value in budget_by_type.values()
                 ],
             },

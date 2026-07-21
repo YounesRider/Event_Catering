@@ -44,7 +44,7 @@
     'assets': {
 
         'web.assets_backend': [
-
+            
             'event_catering/static/src/css/dashboard.css',
             'event_catering/static/src/js/dashboard.js',
             'event_catering/static/src/xml/dashboard.xml',

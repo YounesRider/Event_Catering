@@ -273,6 +273,10 @@
                                     </th>
 
                                     <th>
+                                    image du produit
+                                    </th>
+
+                                    <th>
                                         Prix unitaire
                                     </th>
 
@@ -304,6 +308,12 @@
 
                                         <span t-field="line.quantity"/>
 
+                                    </td>
+
+                                    <td>
+                                    <img t-if="line.product_image"
+     t-att-src="image_data_uri(line.product_image)"
+     style="width:60px;height:60px;"/>
                                     </td>
 
 
@@ -350,76 +360,34 @@
 
 
                         <table class="table table-sm table-bordered">
+    <thead>
+        <tr>
+            <th>Employé</th>
+            <th>Rôle</th>
+            <th>certificate</th>
+        </tr>
+    </thead>
 
+    <tbody>
+        <tr t-foreach="o.staff_allocation_ids" t-as="staff">
+            <td>
+    <img t-if="staff.employee_id.image_1920"
+         t-att-src="image_data_uri(staff.employee_id.image_1920)"
+         style="width:40px;height:40px;border-radius:50%;vertical-align:middle;margin-right:8px;"/>
 
-                            <thead>
+    <span t-field="staff.employee_id"/>
+</td>
 
-                                <tr>
+            <td>
+                <span t-field="staff.role"/>
+            </td>
+            <td>
+                <span t-field="staff.certificate"/>
+            </td>
 
-                                    <th>
-                                        Employé
-                                    </th>
-
-                                    <th>
-                                        Rôle
-                                    </th>
-
-                                    <th>
-                                        Début
-                                    </th>
-
-                                    <th>
-                                        Fin
-                                    </th>
-
-                                </tr>
-
-                            </thead>
-
-
-
-                            <tbody>
-
-
-                                <tr t-foreach="o.staff_allocation_ids"
-                                    t-as="staff">
-
-
-                                    <td>
-
-                                        <span t-field="staff.employee_id"/>
-
-                                    </td>
-
-
-                                    <td>
-
-                                        <span t-field="staff.role"/>
-
-                                    </td>
-
-
-                                    <td>
-
-                                        <span t-field="staff.start_time"/>
-
-                                    </td>
-
-
-                                    <td>
-
-                                        <span t-field="staff.end_time"/>
-
-                                    </td>
-
-
-                                </tr>
-
-
-                            </tbody>
-
-
-                        </table>
+        </tr>
+    </tbody>
+</table>
 
 
 

@@ -257,7 +257,7 @@ class EventCateringDashboard extends Component {
 
 
                             data:
-                                this.data.budget.actual,
+                                this.data.budget.reel,
 
                         }
 

@@ -118,15 +118,18 @@ class EventCateringEvent(models.Model):
     # ==================================================
 
     priority = fields.Selection(
-        [
-            ('0', 'Faible'),
-            ('1', 'Normale'),
-            ('2', 'Haute'),
-        ],
-        string="Priorité",
-        default='1',
-        tracking=True,
-    )
+    [
+        ('1', 'Faible'),
+        ('2', 'Normale'),
+        ('3', 'Haute'),
+        ('4', 'Urgente'),
+        ('5', 'Critique'),
+        ('6', 'Très critique'),
+    ],
+    string='Priorité',
+    default='1',
+    tracking=True
+)
 
     color = fields.Integer(
         string="Couleur"

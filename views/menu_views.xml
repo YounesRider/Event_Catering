@@ -4,7 +4,7 @@
     <menuitem id="menu_event_catering_root"
           name="Event Catering"
           sequence="10"
-          web_icon="event_catering/static/description/icon.png"/>
+          web_icon="event_catering/static/description/eventIcon.png"/>
 
     <!-- dashboard -->    
     <menuitem id="menu_event_catering_dashboard"

@@ -70,7 +70,7 @@ Budget estimé
 <div class="event-dashboard-card">
 
 <h3>
-<t t-esc="this.data.kpi.actual_budget"/>
+<t t-esc="this.data.kpi.reel_budget"/>
 </h3>
 
 <p>
